@@ -10,7 +10,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-var queueEndpoint = "/api/queue"
+var queueEndpoint = "/api/v3/queue"
 
 func (c Config) GetCurrentQueue() (SonarrQueue, error) {
 	log.Info("Getting Sonarr queue from ", c.SonarrURL+queueEndpoint)
