@@ -14,6 +14,12 @@ var (
 	bucketName = []byte("torrents")
 )
 
+type SonarrQueueItemDBEntry struct {
+	Item        SonarrQueueItem `json:"item"`
+	LastChecked time.Time       `json:"lastChecked"`
+}
+
+
 func main() {
 	log.SetFormatter(&log.TextFormatter{
 		FullTimestamp: true,
