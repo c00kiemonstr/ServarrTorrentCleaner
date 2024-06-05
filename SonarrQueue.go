@@ -9,7 +9,7 @@ import (
     "time"
 )
 
-type SonarrQueueResponse struct {
+type SonarrQueue struct {
     Page           int              `json:"page"`
     PageSize       int              `json:"pageSize"`
     SortKey        string           `json:"sortKey"`
