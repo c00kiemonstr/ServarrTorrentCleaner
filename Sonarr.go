@@ -49,9 +49,9 @@ func (c Config) GetCurrentQueue() (SonarrQueue, error) {
 
 	//Sonarr reterns an item per episode, we want an item per torrent, filter to get out unique items by DownloadID
 	var uniqueQueue = make(map[string]SonarrQueueItem)
-	for _, item := range queue {
-		uniqueQueue[item.DownloadID] = item
-	}
+    for _, item := range queueResponse.Records {
+        uniqueQueue[item.DownloadID] = item
+    }
 	queue = nil
 	//Back to an array
 	for _, item := range uniqueQueue {
