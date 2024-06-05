@@ -12,6 +12,12 @@ import (
 
 var queueEndpoint = "/api/v3/queue"
 
+// Define SonarrQueueItemDelete type
+type SonarrQueueItemDelete struct {
+	ID        int  `json:"id"`
+	Blacklist bool `json:"blacklist"`
+}
+
 func (c Config) GetCurrentQueue() (SonarrQueue, error) {
 	log.Info("Getting Sonarr queue from ", c.SonarrURL+queueEndpoint)
 	req, err := http.NewRequest("GET", c.SonarrURL+queueEndpoint, nil)
