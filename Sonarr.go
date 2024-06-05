@@ -20,7 +20,9 @@ type SonarrQueueItemDelete struct {
 
 func (c Config) GetCurrentQueue() (SonarrQueue, error) {
 	log.Info("Getting Sonarr queue from ", c.SonarrURL+queueEndpoint)
-	req, err := http.NewRequest("GET", c.SonarrURL+queueEndpoint, nil)
+	url := fmt.Sprintf("%s%s?pageSize=%d", c.SonarrURL, queueEndpoint, 100)
+
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return SonarrQueue{}, err
 	}
