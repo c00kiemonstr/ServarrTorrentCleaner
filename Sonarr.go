@@ -47,22 +47,24 @@ func (c Config) GetCurrentQueue() (SonarrQueue, error) {
 		}
 	}
 
-	//Sonarr reterns an item per episode, we want an item per torrent, filter to get out unique items by DownloadID
+	// Sonarr returns an item per episode, we want an item per torrent, filter to get out unique items by DownloadID
 	var uniqueQueue = make(map[string]SonarrQueueItem)
-    for _, item := range queueResponse.Records {
-        uniqueQueue[item.DownloadID] = item
-    }
-	queue = nil
-	//Back to an array
-	for _, item := range uniqueQueue {
-		queue = append(queue, item)
+	for _, item := range queue.Records {
+		uniqueQueue[item.DownloadID] = item
 	}
-	return queue, err
+	// Convert map back to array
+	var uniqueQueueArray []SonarrQueueItem
+	for _, item := range uniqueQueue {
+		uniqueQueueArray = append(uniqueQueueArray, item)
+	}
+
+	queue.Records = uniqueQueueArray // Update queue with unique items
+	return queue, nil
 }
 
 func (c Config) DeleteFromQueue(id int, blacklist ...bool) error {
 	if len(blacklist) == 0 {
-		blacklist[0] = false
+		blacklist = append(blacklist, false)
 	}
 
 	SonarrQueueItemDelete := SonarrQueueItemDelete{id, blacklist[0]}

@@ -55,7 +55,7 @@ func main() {
 		if err == nil {
 			log.Info("Looping through current queue")
 			//Loop the queue items
-			for _, currentQueueItem := range queue {
+			for _, currentQueueItem := range queue.Records {
 				//Ignore Queued Items
 				if currentQueueItem.Status == "Queued" {
 					continue
